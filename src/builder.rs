@@ -17,11 +17,13 @@ fn main() {
         .build();
 
     application.connect_activate(|app| {
-        let label = Label::new(Some("Does the Tooltip work?"));
+        let label = Label::builder()
+            .tooltip_text("test")
+            .label("Does the Tooltip work?")
+            .build();
 
         let window = ApplicationWindow::builder()
             .application(app)
-            .tooltip_text("test")
             .child(&label)
             .build();
 

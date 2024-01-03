@@ -6,7 +6,19 @@ edition = "2021"
 [features]
 gtk3 = ["dep:gtk", "dep:gtk-layer-shell"]
 gtk4 = ["dep:gtk4", "dep:gtk4-layer-shell"]
+no_display = []
 
+[[bin]]
+name = "builder"
+path = "src/builder.rs"
+
+[[bin]]
+name = "query"
+path = "src/query.rs"
+
+[[bin]]
+name = "set"
+path = "src/set.rs"
 
 [dependencies]
 gtk = { version = "0.18.1", optional = true }
