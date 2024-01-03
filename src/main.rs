@@ -13,27 +13,25 @@ use gtk_layer_shell::LayerShell;
 
 fn main() {
     let application = Application::builder()
-        .application_id("me.eimmer.bar-rs")
+        .application_id("segfault.please")
         .build();
 
-    application.connect_activate(build_ui);
+    application.connect_activate(|app| {
+        let label = Label::new(Some("Does the Tooltip work?"));
+
+        let window = ApplicationWindow::builder()
+            .application(app)
+            .tooltip_text("test")
+            .child(&label)
+            .build();
+
+        window.init_layer_shell();
+
+        #[cfg(feature = "gtk3")]
+        window.show_all();
+
+        window.present();
+    });
 
     application.run();
-}
-
-fn build_ui(app: &Application) {
-    let label = Label::new(Some("Does the Tooltip work?"));
-
-    let window = ApplicationWindow::builder()
-        .application(app)
-        .tooltip_text("test")
-        .child(&label)
-        .build();
-
-    window.init_layer_shell();
-
-    #[cfg(feature = "gtk3")]
-    window.show_all();
-
-    window.present();
 }
